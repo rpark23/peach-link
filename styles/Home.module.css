@@ -1,116 +1,298 @@
 .container {
-  padding: 0 2rem;
+  background-color: #323233;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 .main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+  border-radius: 28px;
+  height: 77vh;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  text-align: center;
+
+  width: 400px;
+  box-shadow: 0 12px 56px rgb(119 118 122 / 15%);
+  position: relative;
+  top: 48px;
+
+  box-sizing: content-box;
 }
 
-.footer {
+.createAccount {
+  align-items: center;
+  color: white;
   display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+  flex-direction: column;
+  margin-top: 4.5vh;
 }
 
 .title {
-  margin: 0;
+  margin: 5vh 0 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 34px;
 }
 
-.title,
-.description {
-  text-align: center;
+.walletCreated {
+  margin-top: 1vh;
 }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
+.walletCreated a {
+  color: #FC8181;
   text-decoration: none;
-  border: 1px solid #eaeaea;
+}
+
+.walletCreated a:hover {
+  color: #fb4f4f;
+  text-decoration: underline;
+}
+
+.airdrop {
+  animation: fadeIn 2s;
+  width: 300px;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+.airdrop .chooseReward {
+  margin: 5vh 0 1.75vh;
+}
+
+.airdrop button {
+  align-items: center;
+  background-color: #323233;
+  border-color: white;
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  display: flex;
+  height: 36px;
+  justify-content: space-between;
+  margin-top: 1.5vh;
+  padding: 0 15px;
+  text-align: left;
+  width: 100%;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.airdrop button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.airdrop button > div {
+  display: flex;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.airdrop button > div > p {
+  margin-left: 10px;
+  margin-top: 1px;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.airdrop button > p {
+  margin-top: 1px;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
+.useFunds {
+  font-size: 0.9rem;
+  margin-top: 2vh;
+}
+
+/*
+-----------------------------------
+*/
+
+.displayAssets {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4.5vh;
+}
+
+.displayAssets .back {
+  background: none;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  left: 30px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 20px;
+}
+
+.displayAssets h2 {
+  margin: 3vh 0 0;
+  font-size: 34px;
+}
+
+.displayAssets h1 {
+  margin-top: 3vh;
+  margin-right: 9px;
+  font-size: 45px;
+  margin-bottom: 3vh;
+}
+
+.displayAssets .token {
+  border-width: 1px;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  width: 284px;
+}
+
+.displayAssets .token > div {
+  display: flex;
+}
+
+.displayAssets .token > div > p {
+  margin-left: 10px;
+  margin-top: 1px;
+}
+
+.displayAssets .buy {
+  background-color: #323233;
+  border-color: #81fc81;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  color: #81fc81;
+  font-size: 0.9rem;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  padding: 8px 0;
+  width: 250px;
+}
+
+.displayAssets .buy:hover {
+  background-color: #81fc81;
+  color: black;
+  cursor: pointer;
+}
+
+.displayAssets .nfts {
+  align-items: center;
+  background-color: #323233;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+  margin-top: 2vh;
+  padding: 8px 16px;
+  width: 250px;  
+}
+
+.displayAssets .nfts:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+/*
+-----------------------------------
+*/
+
+.viewNFTs {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4.5vh;
+}
+
+.viewNFTs .back {
+  background: none;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  left: 30px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 20px;
+}
+
+.viewNFTs h2 {
+  margin: 3vh 0 0;
+  font-size: 34px;
+}
+
+.viewNFTs .posts {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2vh;
+}
+
+.viewNFTs .posts .emptyFrame {
+  align-items: center;
+  border-style: dashed;
+  display: flex;
+  height: 240px;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.viewNFTs .posts .frame {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1vh;
+}
+
+.viewNFTs .posts .frame .description {
+  border-width: 1px;
+  display: flex;
+  font-size: 0.7rem;
+  justify-content: space-between;
+  margin-top: 2px;
+  padding: 5px 10px;
+  width: 220px;
+}
+
+.viewNFTs .posts button {
+  background-color: #323233;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 0.9rem;
+  margin-top: 2vh;
+  padding: 8px 0;
+  width: 250px;
+}
+
+.viewNFTs .posts .mint {
+  border-color: #81fcbf;
+  color: #81fcbf;
+}
+
+.viewNFTs .posts .mint:hover {
+  background-color: #81fcbf;
+  color: black;
+  cursor: pointer;
+}
+
+.viewNFTs .posts .browse {
+  border-color: white;
+  color: white;
+}
+
+.viewNFTs .posts .browse:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
