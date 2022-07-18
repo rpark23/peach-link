@@ -206,7 +206,7 @@
 -----------------------------------
 */
 
-.viewNFTs {
+.creatorView {
   align-items: center;
   color: white;
   display: flex;
@@ -214,7 +214,7 @@
   margin-top: 4.5vh;
 }
 
-.viewNFTs .back {
+.creatorView .back {
   background: none;
   color: white;
   border: none;
@@ -227,18 +227,52 @@
   top: 20px;
 }
 
-.viewNFTs h2 {
+.creatorView h2 {
   margin: 3vh 0 0;
   font-size: 34px;
 }
 
-.viewNFTs .posts {
+.creatorView .creatorInfo {
   display: flex;
   flex-direction: column;
+  margin-top: 4vh;
+}
+
+.creatorView .creatorInfo button {
+  background-color: #323233;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 0.9rem;
+  padding: 8px 0;
+  width: 250px;
+}
+
+.creatorView .creatorInfo .createAccount {
+  border-color: #81fcbf;
+  color: #81fcbf;
+  margin-top: 3vh;
+}
+
+.creatorView .creatorInfo .createAccount:hover {
+  background-color: #81fcbf;
+  color: black;
+  cursor: pointer;
+}
+
+.creatorView .creatorInfo .viewAccount {
+  border-color: white;
+  color: white;
   margin-top: 2vh;
 }
 
-.viewNFTs .posts .emptyFrame {
+.creatorView .creatorInfo .viewAccount:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+/*.creatorView .creatorInfo .emptyFrame {
   align-items: center;
   border-style: dashed;
   display: flex;
@@ -247,7 +281,7 @@
   margin-bottom: 1vh;
 }
 
-.viewNFTs .posts .frame {
+.creatorView .creatorInfo .frame {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -295,4 +329,4 @@
   background-color: white;
   color: black;
   cursor: pointer;
-}
+}*/

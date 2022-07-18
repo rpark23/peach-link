@@ -4,6 +4,8 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import Registry from "../contracts/Registry.json";
+import CreatorFactory from "../contracts/CreatorFactory.json";
+import Creator from "../contracts/Creator.json";
 
 import { Magic } from 'magic-sdk';
 import { ethers, Contract, Wallet, utils } from 'ethers';
@@ -21,6 +23,9 @@ export default function Home() {
   let [balance, setBalance] = useState(undefined);
   let [posts, setPosts] = useState(undefined);
   
+  let [creator, setCreator] = useState(false);
+  let [creatorFactory, setCreatorFactory] = useState(undefined);
+  let [creatorContract, setCreatorContract] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
@@ -29,7 +34,11 @@ export default function Home() {
         rpcUrl: 'http://localhost:8545', // Your own node URL
         chainId: 1337, // Your own node's chainId
       };
-      const magic = new Magic('MAGIC_LINK_PK', {
+      const mumbai = {
+        rpcUrl: 'https://rpc-mumbai.matic.today', // Your own node URL
+        chainId: 80001, // Your own node's chainId
+      };
+      const magic = new Magic('pk_live_FAF905554D7C9B98', {
         network: customNodeOptions,
       });
       const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
@@ -37,8 +46,14 @@ export default function Home() {
       const address = await signer.getAddress();
       
       const registry = new Contract(
-        '0x5FbDB2315678afecb367f032d93F642f64180aa3', // Contract Address
+        '0x5FbDB2315678afecb367f032d93F642f64180aa3',
         Registry.abi,
+        signer
+      );
+
+      const creatorFactory = new Contract(
+        '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        CreatorFactory.abi,
         signer
       );
 
@@ -46,7 +61,9 @@ export default function Home() {
       setSigner(signer);
       setAddress(address);
       setRegistry(registry);
-      setBalance(utils.formatEther(await signer.getBalance()))
+      setBalance(utils.formatEther(await signer.getBalance()));
+
+      setCreatorFactory(creatorFactory);
     };
     init();
   }, []);
@@ -88,9 +105,30 @@ export default function Home() {
     setPosts(posts);
   }
 
+  function creatorView(e) {
+    e.preventDefault();
+    setCreator(true);
+  }
+
   function backToAssets(e) {
     e.preventDefault();
-    setPosts(undefined);
+    setCreator(false);
+  }
+
+  async function createAccount(e) {
+    e.preventDefault();
+    let creatorID = (await creatorFactory.nCreators()).toNumber();
+    console.log(await creatorFactory.newCreator(address));
+    let contractAddress = await creatorFactory.creators(creatorID);
+
+    let creatorContract = new Contract(
+      contractAddress,
+      Creator.abi,
+      signer
+    );
+
+    setCreator(creatorID);
+    setCreatorContract(creatorContract);
   }
 
   async function handleMint(e) {
@@ -162,7 +200,7 @@ export default function Home() {
         </div> 
         : 
         <Fragment>
-        {posts == undefined ? 
+        {!creator ? 
         <div className={styles.displayAssets}>
           <button className={styles.back} onClick={resetChain}>&#10229;</button>
           <Image src={logo} width={60} height={60} />
@@ -184,16 +222,39 @@ export default function Home() {
             <p>$0.00</p>
           </div>
           <button className={styles.buy} onClick={buyTokens}>Buy tokens</button>
-          <button className={styles.nfts} onClick={fetchPosts}>
-            <p>{chain} NFTs</p>
+          <button className={styles.nfts} onClick={creatorView}>
+            <p>Peach Creator</p>
             <p>&#10230;</p>
           </button>
-          <button className={styles.nfts}>
-            <p>View my {chain} Room</p>
+          <button className={styles.nfts} /*onClick={fetchPosts}*/>
+            <p>My Room</p>
             <p>&#10230;</p>
           </button>
         </div> : 
-        <div className={styles.viewNFTs}>
+        <div className={styles.creatorView}>
+          <button className={styles.back} onClick={backToAssets}>&#10229;</button>
+          <Image src={logo} width={60} height={60} />
+          <h2>Peach Creator</h2>
+          {creator == true ?
+          <div className={styles.creatorInfo}>
+            <p>No Creator Account found</p>
+            <button className={styles.createAccount} onClick={createAccount}>Create Account</button>
+          </div> : 
+          <div className={styles.creatorInfo}>
+            <p>Your Creator ID: {creator}</p>
+            <button className={styles.createAccount} onClick={handleMint}>Mint Post</button>
+            <button className={styles.viewAccount} >View Account</button>
+          </div>
+          }          
+        </div>
+        }
+        </Fragment>}
+      </main>
+    </div>
+  )
+}
+
+/*<div className={styles.viewNFTs}>
           <button className={styles.back} onClick={backToAssets}>&#10229;</button>
           <Image src={logo} width={60} height={60} />
           <h2>{chain} NFTs</h2>
@@ -212,10 +273,4 @@ export default function Home() {
             <button className={styles.mint} onClick={handleMint}>Mint</button>
             <button className={styles.browse}>Browse</button>
           </div>
-        </div>
-        }
-        </Fragment>}
-      </main>
-    </div>
-  )
-}
+            </div>*/
